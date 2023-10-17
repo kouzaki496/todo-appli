@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "content": "list 1",
+      "done": true
+    },
+    {
+      "id": 2,
+      "content": "list 2",
+      "done": true
+    },
+    {
+      "id": 3,
+      "content": "list 3",
+      "done": false
+    }
+  ]
+}
