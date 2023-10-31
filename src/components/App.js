@@ -97,14 +97,28 @@ function App() {
     console.log(`[handleDeleteTodoListItem]deleteTodoIndex:${deleteTodoIndex}`);
 
     newTodo.splice(deleteTodoIndex, 1);
+    console.log(`[handleDeleteTodoListItem]newTodo:${JSON.stringify(newTodo)}`);
+
     setTodoList(newTodo);
   };
 
   //ステータスの変更
   const toggleTodoListItemStatus = (id, done) => {
-    console.log(`[handleChangeStatus]id:${id}`);
-    console.log(`[handleChangeStatus]done:${done}`);
-  }
+
+    const todoItem = todoList.find((item) => item.id === id);
+    const newTodoItem = { ...todoItem, done: !done } //doneを反転
+    console.log(`[toggleTodoListItemStatus]newTodoItem:${JSON.stringify(newTodoItem)}`);
+
+    const newTodoList = todoList.map((item) => {
+
+      return item.id !== id ? item : newTodoItem;
+
+    });
+
+    setTodoList(newTodoList);
+    console.log(`[toggleTodoListItemStatus]newTodoList:${JSON.stringify(newTodoList)}`);
+
+  };
 
 
   console.log("完了TODOリスト:", completedList);
