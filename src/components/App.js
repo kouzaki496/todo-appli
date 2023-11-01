@@ -4,7 +4,7 @@ import { ulid } from "ulid";
 import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Header } from "./Header";
-import { TodoTitle } from "./TodoTitle";
+import { Title } from "./Title";
 
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
@@ -49,6 +49,7 @@ function App() {
 
   //コンポーネント：TODOリスト
   const TodoList = ({ todoList }) => {
+    if(todoList.length !== 0)
     return (
       <ul>
         {todoList.map((todo) => (
@@ -147,32 +148,32 @@ function App() {
         />
     </Container>
     <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
+    <Title title="TODOを追加してください" />
+      <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
+        <Input
+          placeholder="〇〇をする"
+          bgColor="white"
+          borderColor="gray.300"
+          focusBorderColor="pink.400"
+          m="4"
+          value={todoText} onChange={onChangeTodoText}
+        ></Input>
+      <AddIcon
+        bg="blue.600"
+        color="white"
+        p={2}
+        boxSize="8"
+        rounded="md"
+        onClick={ handleAddTodoListItem }
+      ></AddIcon>
+      </Flex>
+      {/* <p>入力したテキスト: {todoText}</p> */}
 
-    <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
-      <Input
-        placeholder="〇〇をする"
-        bgColor="white"
-        borderColor="gray.300"
-        focusBorderColor="pink.400"
-        m="4"
-        value={todoText} onChange={onChangeTodoText}
-      ></Input>
-    <AddIcon
-      bg="blue.600"
-      color="white"
-      p={2}
-      boxSize="8"
-      rounded="md"
-      onClick={ handleAddTodoListItem }
-    ></AddIcon>
-    </Flex>
-    {/* <p>入力したテキスト: {todoText}</p> */}
+      <Title title="未完了タスク" as="h2" />
+      <TodoList todoList={inCompletedList} />
 
-    <TodoTitle title="未完了タスク" as="h2" />
-    <TodoList todoList={inCompletedList} />
-
-    <TodoTitle title="完了タスク" as="h2" />
-    <TodoList todoList={completedList} />
+      <Title title="完了タスク" as="h2" />
+      <TodoList todoList={completedList} />
 
     </Container>
     </Box>
