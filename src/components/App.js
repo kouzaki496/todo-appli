@@ -1,38 +1,53 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ulid } from "ulid";
+import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Header } from "./Header";
+import { TodoTitle } from "./TodoTitle";
+
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
-
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState([]);
 
-  //コンポーネント：タイトル
-  const TodoTitle = ({ title, as }) => {
-    if (as === "h1") return <h1>{title}</h1>;
-    if (as === "h2") return <h2>{title}</h2>;
-
-    return <p>{title}</p>
-  }
-
-  //コンポーネント：TODOリスト
+  //コンポーネント：TODOアイテム
   const TodoItem = ({ todo }) => {
     return (
-      <li>
-        {todo.content}
-        <button
-          onClick={ () => toggleTodoListItemStatus(todo.id, todo.done)}
-        >{todo.done ? "未完了にする" : "完了にする"}</button>
-        <button
-          onClick={ () => handleDeleteTodoListItem(todo.id) }
-        >削除</button>
-      </li>
-    )
+      <List
+        borderWidth="1px"
+        borderRadius="md"
+        width={{base: "80vw", md: "38vw"}}
+        p="2"
+        mt="4"
+        bg="white"
+        >
+          <Text display="flex" ml={4}>{todo.content}</Text>
+          <Flex justify="flex-end" alignItems="center">
+            <Button
+              colorScheme="red.400"
+              bg="blue.600"
+              color="white"
+              fontWeight="light"
+              fontSize={{ base: "sm", md: "md"}}
+              variant="solid"
+              size={{ base: "sm", md: "md"}}
+              m="2"
+              onClick={ () => toggleTodoListItemStatus(todo.id, todo.done)}
+            >{todo.done ? "未完了にする" : "完了にする"}</Button>
+            <DeleteIcon
+              variant="outline"
+              color="pink.400"
+              onClick={ () => handleDeleteTodoListItem(todo.id) }
+            >削除</DeleteIcon>
+        </Flex>
+      </List>
+    );
   };
 
-
+  //コンポーネント：TODOリスト
   const TodoList = ({ todoList }) => {
     return (
       <ul>
@@ -124,22 +139,43 @@ function App() {
   console.log("完了TODOリスト:", completedList);
 
   return (
-    <>
+    <Box centerContent>
+    <Container centerContent>
+      <Header
+        title="TODOアプリ"
+        as="h1"
+        />
+    </Container>
+    <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
 
-    <TodoTitle title="TODOアプリ" as="h1" />
-    <input value={todoText} onChange={onChangeTodoText}></input>
-    <button
+    <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
+      <Input
+        placeholder="〇〇をする"
+        bgColor="white"
+        borderColor="gray.300"
+        focusBorderColor="pink.400"
+        m="4"
+        value={todoText} onChange={onChangeTodoText}
+      ></Input>
+    <AddIcon
+      bg="blue.600"
+      color="white"
+      p={2}
+      boxSize="8"
+      rounded="md"
       onClick={ handleAddTodoListItem }
-    >+ リストを追加</button>
-    <p>入力したテキスト: {todoText}</p>
+    ></AddIcon>
+    </Flex>
+    {/* <p>入力したテキスト: {todoText}</p> */}
 
-    <TodoTitle title="未完了リスト" as="h2" />
+    <TodoTitle title="未完了タスク" as="h2" />
     <TodoList todoList={inCompletedList} />
 
-    <TodoTitle title="完了リスト" as="h2" />
+    <TodoTitle title="完了タスク" as="h2" />
     <TodoList todoList={completedList} />
 
-    </>
+    </Container>
+    </Box>
   );
 }
 
