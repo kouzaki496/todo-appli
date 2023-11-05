@@ -1,6 +1,7 @@
 {
   "name": "todo_appli",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@chakra-ui/icon": "^3.2.0",
