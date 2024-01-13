@@ -6,7 +6,8 @@ import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input }
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Header } from "../../ui/Header/Header";
 import { Title } from "../../ui/Header/Title";
-
+import { firebaseApp } from "../../../apis/firebase";
+import Login from "./Login";
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
@@ -116,9 +117,7 @@ function App() {
     const newTodoList = todoList.map((item) => {
       return item.id !== id ? item : newTodoItem;
     });
-
     setTodoList(newTodoList);
-
   };
 
 
@@ -129,6 +128,7 @@ function App() {
         title="TODOアプリ"
         as="h1"
         />
+    <Login />
     </Container>
     <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
     <Title title="TODOを追加してください" />
