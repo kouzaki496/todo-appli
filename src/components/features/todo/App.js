@@ -7,13 +7,14 @@ import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Header } from "../../ui/Header/Header";
 import { Title } from "../../ui/Header/Title";
 import { firebaseApp } from "../../../apis/firebase";
-import Login from "./Login";
+import AuthComponent from "../auth/AuthComponent";
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState([]);
+  const { user } = AuthComponent()
 
   //コンポーネント：TODOアイテム
   const TodoItem = ({ todo }) => {
@@ -128,8 +129,9 @@ function App() {
         title="TODOアプリ"
         as="h1"
         />
-    <Login />
+    <AuthComponent />
     </Container>
+
     <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
     <Title title="TODOを追加してください" />
       <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
