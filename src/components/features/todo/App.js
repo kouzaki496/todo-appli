@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ulid } from "ulid";
+//Chakra
 import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Header } from "./Header";
-import { Title } from "./Title";
-
+import { Header } from "../../ui/Header/Header";
+import { Title } from "../../ui/Header/Title";
+import { firebaseApp } from "../../../apis/firebase";
+import AuthComponent from "../auth/AuthComponent";
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState([]);
+  const { user } = AuthComponent()
 
   //コンポーネント：TODOアイテム
   const TodoItem = ({ todo }) => {
@@ -31,9 +34,9 @@ function App() {
               bg="blue.600"
               color="white"
               fontWeight="light"
+              size={{ base: "sm", md: "md"}}
               fontSize={{ base: "sm", md: "md"}}
               variant="solid"
-              size={{ base: "sm", md: "md"}}
               m="2"
               onClick={ () => toggleTodoListItemStatus(todo.id, todo.done)}
             >{todo.done ? "未完了にする" : "完了にする"}</Button>
@@ -68,14 +71,12 @@ function App() {
     fetchData();
   }, []);
 
-  console.log("TODOリスト:", todoList);
 
   //未完了リスト
   const inCompletedList = todoList.filter((todo) => {
     return !todo.done;
   });
 
-  console.log("未完了TODOリスト:", inCompletedList);
 
   //完了リスト
   const completedList = todoList.filter((todo) => {
@@ -85,7 +86,6 @@ function App() {
   //インプットフォームの状態を管理
   const onChangeTodoText = (event) => {
     setTodoText(event.target.value);
-    console.log(`[onChangeTodoText]todoText:${todoText}`);
   };
 
   //リストの追加
@@ -105,39 +105,22 @@ function App() {
   //リストの削除
   const handleDeleteTodoListItem = (id) => {
     const newTodo = [...todoList];
-    console.log(`[handleDeleteTodoListItem]id:${id}`);
-    console.log(`[handleDeleteTodoListItem:]todoList:${JSON.stringify(todoList)}`);
-
     const isDeleteTodo = (todoList) => todoList.id === id;
     const deleteTodoIndex = todoList.findIndex(isDeleteTodo);
-    console.log(`[handleDeleteTodoListItem]deleteTodoIndex:${deleteTodoIndex}`);
-
     newTodo.splice(deleteTodoIndex, 1);
-    console.log(`[handleDeleteTodoListItem]newTodo:${JSON.stringify(newTodo)}`);
-
     setTodoList(newTodo);
   };
 
   //ステータスの変更
   const toggleTodoListItemStatus = (id, done) => {
-
     const todoItem = todoList.find((item) => item.id === id);
     const newTodoItem = { ...todoItem, done: !done } //doneを反転
-    console.log(`[toggleTodoListItemStatus]newTodoItem:${JSON.stringify(newTodoItem)}`);
-
     const newTodoList = todoList.map((item) => {
-
       return item.id !== id ? item : newTodoItem;
-
     });
-
     setTodoList(newTodoList);
-    console.log(`[toggleTodoListItemStatus]newTodoList:${JSON.stringify(newTodoList)}`);
-
   };
 
-
-  console.log("完了TODOリスト:", completedList);
 
   return (
     <Box centerContent>
@@ -146,7 +129,9 @@ function App() {
         title="TODOアプリ"
         as="h1"
         />
+    <AuthComponent />
     </Container>
+
     <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
     <Title title="TODOを追加してください" />
       <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
