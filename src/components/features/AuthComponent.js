@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FirebaseError } from '@firebase/util'
 import { getAuth,onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { auth, googleProvider } from '../../../apis/firebase';
+import { auth, googleProvider } from '../../lib/firebase';
 
 const AuthComponent = () => {
 

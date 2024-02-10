@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Button, chakra, Container, Heading, Flex } from '@chakra-ui/react'
-import AuthComponent from "../../../components/features/auth/AuthComponent";
+import AuthComponent from "../features/AuthComponent";
 
 export const Header = memo(({ title, as }) => {
   const { user } = AuthComponent()

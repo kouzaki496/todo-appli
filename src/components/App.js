@@ -4,10 +4,10 @@ import { ulid } from "ulid";
 //Chakra
 import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Header } from "../../ui/Header/Header";
-import { Title } from "../../ui/Header/Title";
-import { firebaseApp } from "../../../apis/firebase";
-import AuthComponent from "../auth/AuthComponent";
+import { Header } from "./ui/Header";
+import { Title } from "./ui/Title";
+import { firebaseApp } from "../lib/firebase";
+import AuthComponent from "./features/AuthComponent";
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
