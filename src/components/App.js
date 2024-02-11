@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ulid } from "ulid";
+import { firebaseApp } from "../lib/firebase";
+import AuthComponent from "./features/AuthComponent";
 //Chakra
-import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
+import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Header } from "./ui/Header";
 import { Title } from "./ui/Title";
-import { firebaseApp } from "../lib/firebase";
-import AuthComponent from "./features/AuthComponent";
+import { InputBox } from "./ui/InputBox";
+
 
 const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
@@ -124,25 +126,13 @@ function App() {
 
   return (
     <Box centerContent>
-    <Container centerContent>
-      <Header
-        title="TODOアプリ"
-        as="h1"
-        />
+      <Header/>
     <AuthComponent />
-    </Container>
-
+    <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
     <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
     <Title title="TODOを追加してください" />
       <Flex align="center" justify="flex-end" width={{base: "85vw", md: "40vw"}}>
-        <Input
-          placeholder="〇〇をする"
-          bgColor="white"
-          borderColor="gray.300"
-          focusBorderColor="pink.400"
-          m="4"
-          value={todoText} onChange={onChangeTodoText}
-        ></Input>
+        <InputBox value={todoText} onChange={onChangeTodoText}></InputBox>
       <AddIcon
         bg="blue.600"
         color="white"

@@ -12,3 +12,4 @@ export const Label = memo(({ title, as, fontSize }) => {
     </Heading>
   )
 })
+

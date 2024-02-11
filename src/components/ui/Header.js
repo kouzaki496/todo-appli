@@ -6,7 +6,7 @@ export const Header = memo(({ title, as }) => {
   const { user } = AuthComponent()
   return (
       <Heading
-        width="100vw"
+        width="100%"
         mb="10"
         pl="10"
         h="20"
@@ -16,9 +16,9 @@ export const Header = memo(({ title, as }) => {
         color="gray.200"
         display="flex"
         justifyContent="left"
-        alignItems="center">
-        {title}
+        alignItems="center">TODOアプリ
     </Heading>
   )
 })
+
 
