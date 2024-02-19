@@ -3,6 +3,7 @@ import axios from "axios";
 import { ulid } from "ulid";
 import { firebaseApp } from "../lib/firebase";
 import AuthComponent from "./features/AuthComponent";
+import "../index.css";
 //Chakra
 import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
