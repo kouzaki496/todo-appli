@@ -40,13 +40,11 @@ export const useTodo = () => {
 
   //TODOの削除
   const deleteTodoListItem = (id) => {
-    console.log("deleteTodoListItem");
     const newTodo = [...todoList];
     const isDeleteTodo = (todoList) => todoList.id === id;
     const deleteTodoIndex = todoList.findIndex(isDeleteTodo);
     newTodo.splice(deleteTodoIndex, 1);
     setTodoList(newTodo);
-    console.log("aaa");
   };
 
   return {

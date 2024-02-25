@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FirebaseError } from '@firebase/util'
 import { getAuth,onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from '../../lib/firebase';
+import { Button } from '@chakra-ui/react'
 
 const AuthComponent = () => {
 
@@ -46,18 +47,17 @@ const AuthComponent = () => {
     }
   }
 
-
   return (
     <div>
       {user ? (
         <div>
           <p>{user.displayName}さんがログイン中です</p>
-          <button onClick={handleSignOut}>ログアウト</button>
+          <Button onClick={handleSignOut}>ログアウト</Button>
         </div>
       ) : (
         <div>
           <p>ログインしてください</p>
-          <button onClick={handleSignIn}>Google認証</button>
+          <Button onClick={handleSignIn}>Google認証</Button>
         </div>
       )}
     </div>

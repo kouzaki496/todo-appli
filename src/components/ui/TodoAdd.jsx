@@ -1,17 +1,11 @@
 import React from 'react'
-import { AddButton } from "./AddButton"
+//import Component
 import { Title } from "./Title";
-import { InputBox } from "./InputBox";
+//Chakra
 import { AddIcon } from '@chakra-ui/icons'
+import { Flex,  IconButton } from "@chakra-ui/react";
 
-
-import { Box, Container, Text, List, ListItem, Flex, Button, IconButton, Input } from "@chakra-ui/react";
-
-export const TodoAdd = ({
-  buttonText,
-  todoTextRef,
-  handleAddTodoListItem,
-}) => {
+export const TodoAdd = ({todoTextRef, handleAddTodoListItem }) => {
   return (
   <>
     <Title title="TODOを追加してください" />

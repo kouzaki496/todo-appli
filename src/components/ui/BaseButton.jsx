@@ -25,11 +25,11 @@ const buttonStyleLists = {
 };
 
 // propsのstyleTypeでボタンのスタイルを分岐
-const ButtonA = ({ styleType, onClick, child }) => {
+const BaseButton = ({ styleType, onClick, child }) => {
   const Component = buttonStyleLists[styleType] || buttonStyleLists.default;
   // Component変数に格納したコンポーネントでReact要素を作成
   return <Component onClick={onClick}>{child}</Component>;
 };
 
 
-export default ButtonA;
+export default BaseButton;

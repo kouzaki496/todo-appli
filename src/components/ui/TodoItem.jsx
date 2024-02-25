@@ -1,6 +1,8 @@
 import React from 'react'
+//import Component
 import { DeleteButton } from "./DeleteButton"
-import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "@chakra-ui/react";
+//Chakra
+import { Text, List,  Flex, Button } from "@chakra-ui/react";
 
   //コンポーネント：TODOアイテム
   export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem}) => {

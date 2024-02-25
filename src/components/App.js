@@ -1,16 +1,13 @@
 import React, { useRef } from "react";
-import { firebaseApp } from "../lib/firebase";
 import "../index.css";
 //import Component
 import AuthComponent from "./features/AuthComponent";
-import { TodoItem } from "./ui/TodoItem"
 import { TodoList } from "./ui/TodoList"
 import { TodoAdd } from "./ui/TodoAdd"
 import { useTodo } from "../hooks/useTodo"
 //Chakra
-import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { Header } from "./ui/Header";
-import { Title } from "./ui/Title";
 
 function App() {
   const { user } = AuthComponent();
@@ -36,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <Header title="TODOアプリ" as="h1"/>
       <AuthComponent />
       <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
       <Container centerContent>
