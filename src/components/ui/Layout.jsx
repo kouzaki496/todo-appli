@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 //import Component
-import AuthComponent from "../feature/AuthComponent";
 import { TodoList } from "./TodoList"
 import { TodoAdd } from "./TodoAdd"
 import { Header } from "./Header";
-import { Auth } from "./Auth"
 import { useTodo } from "../../hooks/useTodo"
 import { useObserverUser } from "../../hooks/useObserverUser"
 //Chakra
@@ -12,9 +10,8 @@ import { Container } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 
 export const Layout = () => {
-  // const {user} = AuthComponent();
   const {todoList, addTodoListItem, toggleTodoListItemStatus, deleteTodoListItem} = useTodo();
-  // const {user, signOut, signIn} = useObserverUser();
+  const {user, handleSignOut, handleSignIn} = useObserverUser();
   const todoTextRef = useRef(null);
 
     //未完了リスト
@@ -36,43 +33,40 @@ export const Layout = () => {
   return (
     <>
       <Header title="TODOアプリ" as="h1"/>
-      <AuthComponent />
-      {/* <Auth></Auth> */}
       <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
-      {/* <div>
+      <div>
       {user ? (
         <div>
           <p>{user.displayName}さんがログイン中です</p>
-          <Button onClick={signOut}>ログアウト</Button>
+          <Button onClick={handleSignOut}>ログアウト</Button>
+
+          <Container centerContent>
+          <TodoAdd
+            todoTextRef={todoTextRef}
+            handleAddTodoListItem={handleAddTodoListItem}
+          ></TodoAdd>
+
+          <TodoList
+            todoList={inCompletedList}
+            toggleTodoListItemStatus={toggleTodoListItemStatus}
+            deleteTodoListItem={deleteTodoListItem}
+            title="未完了タスク" as="h2"
+          />
+          <TodoList
+            todoList={completedList}
+            toggleTodoListItemStatus={toggleTodoListItemStatus}
+            deleteTodoListItem={deleteTodoListItem}
+            title="完了タスク" as="h2"
+          />
+          </Container>
         </div>
       ) : (
         <div>
           <p>ログインしてください</p>
-          <Button onClick={signIn}>Google認証</Button>
+          <Button onClick={handleSignIn}>Google認証</Button>
         </div>
       )}
-    </div> */}
-      <Container centerContent>
-
-        <TodoAdd
-          todoTextRef={todoTextRef}
-          handleAddTodoListItem={handleAddTodoListItem}
-        ></TodoAdd>
-
-        <TodoList
-          todoList={inCompletedList}
-          toggleTodoListItemStatus={toggleTodoListItemStatus}
-          deleteTodoListItem={deleteTodoListItem}
-          title="未完了タスク" as="h2"
-        />
-        <TodoList
-          todoList={completedList}
-          toggleTodoListItemStatus={toggleTodoListItemStatus}
-          deleteTodoListItem={deleteTodoListItem}
-          title="完了タスク" as="h2"
-        />
-      </Container>
-
+    </div>
     </>
   );
 };

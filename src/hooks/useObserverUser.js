@@ -24,7 +24,7 @@ export const useObserverUser = () => {
   }, []);
 
   // ログイン
-  const signIn = async () => {
+  const handleSignIn = async () => {
     try {
       //Google認証のポップアップ表示
       const result = await signInWithPopup(auth, googleProvider);
@@ -35,7 +35,7 @@ export const useObserverUser = () => {
   };
 
   //ログアウト
-  const signOut = async () => {
+  const handleSignOut = async () => {
     try {
       const auth = getAuth()
       await signOut(auth);
@@ -47,8 +47,8 @@ export const useObserverUser = () => {
 
   return {
     user,
-    signIn,
-    signOut
+    handleSignIn,
+    handleSignOut
   };
 
 };
