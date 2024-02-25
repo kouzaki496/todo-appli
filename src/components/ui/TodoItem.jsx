@@ -9,11 +9,10 @@ import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "
   const handleDeleteTodoListItem = () => deleteTodoListItem(todo.id);
 
     return (
-      <Container centerContent w="full">
         <List
           borderWidth="1px"
           borderRadius="md"
-          width={{base: "80vw", md: "38vw"}}
+          width={{base: "95vw", md: "80vw", xl: "38vw"}}
           p="2"
           mt="4"
           bg="white"
@@ -40,7 +39,6 @@ import { Box, Container, Text, List, ListItem, Flex, Button, IconButton } from "
               </Button>
           </Flex>
         </List>
-      </Container>
     );
   };
 

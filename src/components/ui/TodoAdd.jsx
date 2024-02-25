@@ -14,23 +14,20 @@ export const TodoAdd = ({
 }) => {
   return (
   <>
-      <Title title="TODOを追加してください" />
-      <Flex align="center" justify="flex-end" w="full">
-        <input
-          placeholder="〇〇をする"
-          ref={todoTextRef}
-          type="text"
-          bgColor="White"
-          borderColor="gray.300"
-          focusBorderColor="pink.400"
-          m="10" />
-        <IconButton
-          onClick={handleAddTodoListItem}
-          icon={<AddIcon />}
-          bg="blue.600"
-          color="white"
-        ></IconButton>
-      </Flex>
+    <Title title="TODOを追加してください" />
+    <Flex align="center" justify="flex-end" w="full" >
+      <input className='todoInput'
+        placeholder="〇〇をする"
+        ref={todoTextRef}
+        type="text"
+        />
+      <IconButton
+        onClick={handleAddTodoListItem}
+        icon={<AddIcon />}
+        bg="blue.600"
+        color="white"
+      ></IconButton>
+    </Flex>
   </>
   )
 };

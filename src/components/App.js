@@ -35,11 +35,11 @@ function App() {
   };
 
   return (
-    <Box centerContent>
+    <>
       <Header/>
       <AuthComponent />
       <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
-      <Container centerContent p={{base: "0", md: "0"}} maxWidth="768px">
+      <Container centerContent>
         <TodoAdd
           todoTextRef={todoTextRef}
           handleAddTodoListItem={handleAddTodoListItem}
@@ -62,7 +62,7 @@ function App() {
           title="完了タスク" as="h2"
         />
     </Container>
-    </Box>
+    </>
   );
 }
 
