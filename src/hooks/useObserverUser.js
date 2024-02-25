@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { FirebaseError } from '@firebase/util'
-import { getAuth,onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { auth, googleProvider } from '../../lib/firebase';
-import { Button } from '@chakra-ui/react'
+import { getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { auth, googleProvider } from '../lib/firebase';
 
-const AuthComponent = () => {
+import * as todoData from "../apis/todos";
 
+export const useObserverUser = () => {
   const [user, setUser] = useState(null); // ログイン状態
 
-  //認証状態の監視
   useEffect (() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -19,14 +18,13 @@ const AuthComponent = () => {
         setUser(null);
       }
   });
-
-  return () => {
-    unsubscribe();
-  };
-}, []);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   // ログイン
-  const handleSignIn = async () => {
+  const signIn = async () => {
     try {
       //Google認証のポップアップ表示
       const result = await signInWithPopup(auth, googleProvider);
@@ -37,7 +35,7 @@ const AuthComponent = () => {
   };
 
   //ログアウト
-  const handleSignOut = async () => {
+  const signOut = async () => {
     try {
       const auth = getAuth()
       await signOut(auth);
@@ -47,22 +45,10 @@ const AuthComponent = () => {
     }
   }
 
-  return (
-    <div>
-      {user ? (
-        <div>
-          <p>{user.displayName}さんがログイン中です</p>
-          <Button onClick={handleSignOut}>ログアウト</Button>
-        </div>
-      ) : (
-        <div>
-          <p>ログインしてください</p>
-          <Button onClick={handleSignIn}>Google認証</Button>
-        </div>
-      )}
-    </div>
-  );
+  return {
+    user,
+    signIn,
+    signOut
+  };
 
 };
-
-export default AuthComponent;
