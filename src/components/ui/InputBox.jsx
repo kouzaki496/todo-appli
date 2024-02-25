@@ -8,7 +8,8 @@ export const InputBox = () => {
       borderColor="gray.300"
       focusBorderColor="pink.400"
       m="4"
-      placeholder="〇〇をする">
+      placeholder="〇〇をする"
+      >
     </Input>
   )
 }
