@@ -14,7 +14,6 @@ export const useTodo = () => {
 
   //ステータスの変更
   const toggleTodoListItemStatus = (id, done) => {
-    console.log("aaa");
     const todoItem = todoList.find((item) => item.id === id);
     const newTodoItem = { ...todoItem, done: !done } //doneを反転
 
@@ -34,7 +33,9 @@ export const useTodo = () => {
       "content": todoText,
       "done": false
     };
-      setTodoList([...todoList, newTodoItem]);
+    return todoData.addTodoData(newTodoItem).then((addTodo) => {
+      setTodoList([addTodo, ...todoList]);
+    });
   };
 
   //TODOの削除

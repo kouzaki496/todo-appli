@@ -9,7 +9,7 @@ export const getAllTodosData = async () => {
 
 //TODOの追加
 export const addTodoData = async(todo) => {
-  const response = await axios.post(todoDataUrl. todo);
+  const response = await axios.post(todoDataUrl, todo);
   return response.data;
 }
 //TODOの削除
