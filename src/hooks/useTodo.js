@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { ulid } from "ulid";
-
+import axios from "axios";
 import * as todoData from "../apis/todos";
+
+const todoDataUrl = "http://localhost:3100/todos";
 
 export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
 
+  // useEffect(() => {
+  //   todoData.getAllTodosData().then((todo) => {
+  //     setTodoList([...todo].reverse());
+  //   })
+  // }, []);
+
   useEffect(() => {
-    todoData.getAllTodosData().then((todo) => {
-      setTodoList([...todo].reverse());
-    })
+    const fetchData = async () => {
+      const response = await axios.get(todoDataUrl);
+      setTodoList(response.data);
+    };
+    fetchData();
   }, []);
+
 
   //ステータスの変更
   const toggleTodoListItemStatus = (id, done) => {
