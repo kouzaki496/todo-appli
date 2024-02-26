@@ -27,7 +27,6 @@ export const useTodo = () => {
 
   //TODOの追加
   const addTodoListItem = (todoText) => {
-    console.log("addTodoListItem");
     const newTodoItem = {
       "id": ulid(),
       "content": todoText,
@@ -40,12 +39,20 @@ export const useTodo = () => {
 
   //TODOの削除
   const deleteTodoListItem = (id) => {
-    const newTodo = [...todoList];
-    const isDeleteTodo = (todoList) => todoList.id === id;
-    const deleteTodoIndex = todoList.findIndex(isDeleteTodo);
-    newTodo.splice(deleteTodoIndex, 1);
-    setTodoList(newTodo);
-  };
+    todoData.deleteTodoData(id).then((deleteTodoListItemId) => {
+      const newTodoList = todoList.filter(
+        (item) => item.id !== deleteTodoListItemId
+      );
+      setTodoList(newTodoList);
+    })
+  }
+  // const deleteTodoListItem = (id) => {
+  //   const newTodo = [...todoList];
+  //   const isDeleteTodo = (todoList) => todoList.id === id;
+  //   const deleteTodoIndex = todoList.findIndex(isDeleteTodo);
+  //   newTodo.splice(deleteTodoIndex, 1);
+  //   setTodoList(newTodo);
+  // };
 
   return {
     todoList,
