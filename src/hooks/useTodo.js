@@ -5,6 +5,7 @@ import * as todoData from "../apis/todos";
 
 export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
+  const [todoText, setTodoText] = useState([]);
   const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
   // useEffect(() => {
@@ -26,7 +27,10 @@ export const useTodo = () => {
   const toggleTodoListItemStatus = (id, done) => {
     const todoItem = todoList.find((item) => item.id === id);
     const newTodoItem = { ...todoItem, done: !done } //doneを反転
-      setTodoList(newTodoItem);
+    const newTodoList = todoList.map((item) =>{
+      return item.id !== id ? item : newTodoItem;
+    });
+      setTodoList(newTodoList);
   };
   // const toggleTodoListItemStatus = (id, done) => {
   //   const todoItem = todoList.find((item) => item.id === id);
@@ -48,6 +52,7 @@ export const useTodo = () => {
       "done": false
     };
       setTodoList([...todoList, newTodoItem]);
+      setTodoText("");
   };
   // const addTodoListItem = (todoText) => {
   //   const newTodoItem = {
