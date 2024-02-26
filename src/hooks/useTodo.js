@@ -3,10 +3,9 @@ import { ulid } from "ulid";
 import axios from "axios";
 import * as todoData from "../apis/todos";
 
-const todoDataUrl = "http://localhost:3100/todos";
-
 export const useTodo = () => {
   const [todoList, setTodoList] = useState([]);
+  const todoDataUrl = "http://localhost:3100/todos"; //モックサーバーのURL
 
   // useEffect(() => {
   //   todoData.getAllTodosData().then((todo) => {
@@ -27,14 +26,19 @@ export const useTodo = () => {
   const toggleTodoListItemStatus = (id, done) => {
     const todoItem = todoList.find((item) => item.id === id);
     const newTodoItem = { ...todoItem, done: !done } //doneを反転
-
-    todoData.updateTodoData(id, newTodoItem).then((updatedTodo) => {
-      const newTodoList = todoList.map((item) =>
-        item.id !== updatedTodo.id ? item : updatedTodo
-      );
-      setTodoList(newTodoList);
-    });
+      setTodoList(newTodoItem);
   };
+  // const toggleTodoListItemStatus = (id, done) => {
+  //   const todoItem = todoList.find((item) => item.id === id);
+  //   const newTodoItem = { ...todoItem, done: !done } //doneを反転
+
+  //   todoData.updateTodoData(id, newTodoItem).then((updatedTodo) => {
+  //     const newTodoList = todoList.map((item) =>
+  //       item.id !== updatedTodo.id ? item : updatedTodo
+  //     );
+  //     setTodoList(newTodoList);
+  //   });
+  // };
 
   //TODOの追加
   const addTodoListItem = (todoText) => {
@@ -43,20 +47,34 @@ export const useTodo = () => {
       "content": todoText,
       "done": false
     };
-    return todoData.addTodoData(newTodoItem).then((addTodo) => {
-      setTodoList([addTodo, ...todoList]);
-    });
+      setTodoList([...todoList, newTodoItem]);
   };
+  // const addTodoListItem = (todoText) => {
+  //   const newTodoItem = {
+  //     "id": ulid(),
+  //     "content": todoText,
+  //     "done": false
+  //   };
+  //   return todoData.addTodoData(newTodoItem).then((addTodo) => {
+  //     setTodoList([addTodo, ...todoList]);
+  //   });
+  // };
 
   //TODOの削除
   const deleteTodoListItem = (id) => {
-    todoData.deleteTodoData(id).then((deleteTodoListItemId) => {
       const newTodoList = todoList.filter(
-        (item) => item.id !== deleteTodoListItemId
+        (item) => item.id !== id
       );
       setTodoList(newTodoList);
-    })
   }
+  // const deleteTodoListItem = (id) => {
+  //   todoData.deleteTodoData(id).then((deleteTodoListItemId) => {
+  //     const newTodoList = todoList.filter(
+  //       (item) => item.id !== deleteTodoListItemId
+  //     );
+  //     setTodoList(newTodoList);
+  //   })
+  // }
   // const deleteTodoListItem = (id) => {
   //   const newTodo = [...todoList];
   //   const isDeleteTodo = (todoList) => todoList.id === id;
