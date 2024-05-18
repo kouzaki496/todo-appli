@@ -10,5 +10,7 @@ export const Title = memo(({ title, as, fontSize }) => {
       w="">
       {title}
     </Heading>
-  )
-})
+  );
+});
+
+export default Title;

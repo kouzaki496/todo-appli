@@ -1,10 +1,9 @@
 import React, { memo } from "react";
-import { Button, chakra, Container, Heading, Flex } from '@chakra-ui/react'
-import AuthComponent from "../../../components/features/auth/AuthComponent";
+import { chakra, Heading, Flex, Box, Text} from '@chakra-ui/react'
 
 export const Header = memo(({ title, as }) => {
-  const { user } = AuthComponent()
   return (
+    <>
       <Heading
         width="100vw"
         mb="10"
@@ -12,13 +11,14 @@ export const Header = memo(({ title, as }) => {
         h="20"
         as={as}
         fontSize={ {base: "2xl", md: "4xl" }}
-        bg="blue.700"
         color="gray.200"
+        bg="blue.700"
         display="flex"
         justifyContent="left"
-        alignItems="center">
-        {title}
-    </Heading>
+        alignItems="center">{title}
+      </Heading>
+    </>
   )
 })
+
 
