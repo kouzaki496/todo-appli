@@ -3,13 +3,12 @@ import { FirebaseError } from '@firebase/util'
 import { getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from '../lib/firebase';
 
-import * as todoData from "../apis/todos";
-
 export const useObserverUser = () => {
   const [user, setUser] = useState(null); // ログイン状態
 
   useEffect (() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    const authInstance  = getAuth();
+    const unsubscribe = onAuthStateChanged(authInstance , (authUser) => {
       if (authUser) {
         //ログインしている場合
         setUser(authUser);
@@ -18,9 +17,7 @@ export const useObserverUser = () => {
         setUser(null);
       }
   });
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   // ログイン
@@ -37,8 +34,8 @@ export const useObserverUser = () => {
   //ログアウト
   const handleSignOut = async () => {
     try {
-      const auth = getAuth()
-      await signOut(auth);
+      const authInstance = getAuth()
+      await signOut(authInstance);
       console.log('ログアウト成功', user);
     } catch (error) {
       console.error('ログアウトエラー:',error);
