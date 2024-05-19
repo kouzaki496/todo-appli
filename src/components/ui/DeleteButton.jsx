@@ -1,20 +1,25 @@
-import React from 'react'
+import React from 'react';
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { IconButton } from '@chakra-ui/react'
 
-export const DeleteButton = () => {
+export const DeleteButton = ({ onClick, done, ...props }) => {
   return (
-      <DeleteIcon
-      variant="outline"
-      color="pink.400"
-      ></DeleteIcon>
+    <IconButton
+      colorScheme="gray"
+      aria-label="削除"
+      size="sm"
+      variant="gohst"
+      color="pink.500"
+      bg={done ? 'gray.300' : 'pink.100'}
+      // borderColor={done ? 'gray.300' : 'pink.400'}
+      _hover={{
+        bg: done ? 'gray.200' : 'pink.200', // ホバー時の背景色を追加
+      }}
+      icon={<DeleteIcon />} // leftIcon プロパティを使ってアイコンを追加する
+      onClick={onClick}
+      {...props}
+    />
   )
 }
-
-{/* <DeleteIcon
-variant="outline"
-color="pink.400"
-{...props}
-></DeleteIcon> */}
 
 export default DeleteButton;

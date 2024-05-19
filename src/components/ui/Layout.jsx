@@ -32,14 +32,17 @@ export const Layout = () => {
     };
   return (
     <>
-      <Header title="TODOアプリ" as="h1"/>
+      <Header
+        title="TODOアプリ"
+        as="h1"
+        user={user}
+        handleSignOut={handleSignOut}
+        handleSignIn={handleSignIn}
+      />
       <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
       <div>
       {user ? (
         <div>
-          <p>{user.displayName}さんがログイン中です</p>
-          <Button onClick={handleSignOut}>ログアウト</Button>
-
           <Container centerContent>
           <TodoAdd
             todoTextRef={todoTextRef}
@@ -63,7 +66,6 @@ export const Layout = () => {
       ) : (
         <div>
           <p>ログインしてください</p>
-          <Button onClick={handleSignIn}>Google認証</Button>
         </div>
       )}
     </div>
