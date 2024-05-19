@@ -1,3 +1,4 @@
+//Layout.jsx
 import React, { useRef, useState, useEffect } from "react";
 //import Component
 import { TodoList } from "./TodoList"
@@ -6,8 +7,7 @@ import { Header } from "./Header";
 import { useTodo } from "../../hooks/useTodo"
 import { useObserverUser } from "../../hooks/useObserverUser"
 //Chakra
-import { Container } from "@chakra-ui/react";
-import { Button, Box } from "@chakra-ui/react";
+import { Button,Box } from "@chakra-ui/react";
 
 export const Layout = () => {
   const {todoList, addTodoListItem, toggleTodoListItemStatus, deleteTodoListItem} = useTodo();
@@ -30,6 +30,10 @@ export const Layout = () => {
       //インプットフォームを空にする
       todoTextRef.current.value="";
     };
+    const saveTodoToFirestore = (todoText) => {
+      // Firestoreへのデータ保存ロジックをここに実装する
+      // この関数は認証されている場合にのみ呼び出されます
+    };
   return (
     <>
       <Header
@@ -41,7 +45,6 @@ export const Layout = () => {
       />
       <h2>{process.env.REACT_APP_HELLO_WORLD}</h2>
       <div>
-      {user ? (
         <div>
           <Box w="100%" maxW="800px" mx="auto" p={4}>
           <TodoAdd
@@ -63,10 +66,7 @@ export const Layout = () => {
           />
           </Box>
         </div>
-      ) : (
-        <div>
-        </div>
-      )}
+
     </div>
     </>
   );
