@@ -13,9 +13,10 @@ export const InputBox = forwardRef(({ todoTextRef, onKeyPress }, ref) => {
       borderWidth="1px"
       borderRadius="md"
       p="2"
+      m="1"
       boxShadow="md"
       _focus={{ borderColor: "pink.400" }}
-      mr="2"
+
       onKeyPress={onKeyPress}
     />
   );

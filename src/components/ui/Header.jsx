@@ -28,24 +28,24 @@ export const Header = memo(({ title, as, user, handleSignOut, handleSignIn }) =>
             colorScheme="teal"
             fontSize={isMobile ? "sm" : "lg"}
             leftIcon={<FaSignOutAlt />}
-          >
+            >
             ログアウト
           </Button>
           ) : (
-            <>
-              <Text mb={2}>ログインしてください</Text>
-              <Button
-                onClick={handleSignIn}
-                colorScheme="pink"
-                fontSize={isMobile ? "sm" : "lg"}
-                leftIcon={<FaSignInAlt />}
-              >
-                Google認証
-              </Button>
-            </>
-          )}
-        </Box>
-      </Flex>
+          <>
+            <Text mb={2}>ログインしてください</Text>
+            <Button
+              onClick={handleSignIn}
+              colorScheme="pink"
+              fontSize={isMobile ? "sm" : "lg"}
+              leftIcon={<FaSignInAlt />}
+            >
+              Google認証
+            </Button>
+          </>
+        )}
+      </Box>
+    </Flex>
   )
 })
 
