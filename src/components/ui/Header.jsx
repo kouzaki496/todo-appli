@@ -1,8 +1,9 @@
 import React, { memo } from "react";
-import { Heading, Flex, Button, Box, Text } from '@chakra-ui/react'
+import { Heading, Flex, Button, Box, Text, useBreakpointValue } from '@chakra-ui/react'
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
 export const Header = memo(({ title, as, user, handleSignOut, handleSignIn }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false }); // モバイルかどうかを判定
   return (
     <Flex
       as="header"
@@ -12,8 +13,9 @@ export const Header = memo(({ title, as, user, handleSignOut, handleSignIn }) =>
       p={4}
       bg="blue.700"
       color="white"
+      fontSize={isMobile ? "sm" : "lg"}
     >
-      <Heading as = {as} > {title} </Heading>
+      <Heading as = {as} mb={isMobile ? 2 : 0} fontSize={isMobile ? "xl" : "4xl"}> {title} </Heading>
       <Box textAlign="right">
         {user && (
           <Text mb={2}>
@@ -24,6 +26,7 @@ export const Header = memo(({ title, as, user, handleSignOut, handleSignIn }) =>
           <Button
             onClick={handleSignOut}
             colorScheme="teal"
+            fontSize={isMobile ? "sm" : "lg"}
             leftIcon={<FaSignOutAlt />}
           >
             ログアウト
@@ -34,6 +37,7 @@ export const Header = memo(({ title, as, user, handleSignOut, handleSignIn }) =>
               <Button
                 onClick={handleSignIn}
                 colorScheme="pink"
+                fontSize={isMobile ? "sm" : "lg"}
                 leftIcon={<FaSignInAlt />}
               >
                 Google認証

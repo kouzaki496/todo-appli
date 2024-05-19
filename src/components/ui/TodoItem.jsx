@@ -1,44 +1,53 @@
 import React from 'react'
+import { FaCheck } from 'react-icons/fa'; // FaCheckをインポートする
 //import Component
-import { DeleteButton } from "./DeleteButton"
-import StatusButton from "./StatusButton";
+import { DeleteIcon, AddIcon } from "@chakra-ui/icons";
+import { CustomButton } from './Button'; // インポート名を修正
+import { Button } from './Button';
 //Chakra
-import { Text, Flex } from "@chakra-ui/react";
+import { Flex, Text, Center, Box, Icon } from "@chakra-ui/react";
 
 //コンポーネント：TODOアイテム
 export const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem}) => {
 
   const handleToggleTodoListItemStatus = () => toggleTodoListItemStatus(todo.id, todo.done);
-  const handleDeleteTodoListItem = () => {
-    console.log("Delete button clicked for id:", todo.id); // デバッグ用ログ
-    deleteTodoListItem(todo.id);
-  };
+  const handleDeleteTodoListItem = () => deleteTodoListItem(todo.id);
 
   return (
-    <Flex
-      boxShadow="md" // 影を追加
+    <Box
+      boxShadow="md"
       borderRadius="md"
-      width={{ base: "95vw", md: "80vw", xl: "38vw" }}
+      // width={{ base: "95vw", md: "80vw", xl: "38vw" }}
+      w="full"
       p="2"
       mt="4"
       bg={todo.done ? 'gray.100' : 'white'}
-      alignItems="center"
-      justifyContent="space-between"
     >
+      <Flex align="center" justify="space-between">
       <Text ml={4}>
         {todo.content}
       </Text>
       <Flex justify="flex-end" alignItems="center">
-        <StatusButton
-          done={todo.done}
-          onClick={handleToggleTodoListItemStatus}
-        />
-        <DeleteButton
-          done={todo.done}
-          onClick={handleDeleteTodoListItem}
-        />
+        {/* ステータスボタン */}
+        <CustomButton
+            icon={<FaCheck />}
+            onClick={handleToggleTodoListItemStatus}
+            bg={todo.done ? 'gray.300' : 'green.100'}
+            color={todo.done ? 'gray.500' : 'green.500'}
+            hoverBg={todo.done ? 'gray.400' : 'green.200'}
+            hoverColor={todo.done ? 'gray.600' : 'green.600'}
+          />
+          {/* 削除ボタン */}
+          <CustomButton
+            icon={<DeleteIcon color="pink.500" />}
+            onClick={handleDeleteTodoListItem}
+            bg={todo.done ? 'gray.300' : 'pink.100'}
+            hoverBg={todo.done ? 'gray.400' : 'pink.200'}
+            hoverColor="pink.600"
+          />
+        </Flex>
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 

@@ -7,7 +7,7 @@ import { useTodo } from "../../hooks/useTodo"
 import { useObserverUser } from "../../hooks/useObserverUser"
 //Chakra
 import { Container } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 
 export const Layout = () => {
   const {todoList, addTodoListItem, toggleTodoListItemStatus, deleteTodoListItem} = useTodo();
@@ -43,7 +43,7 @@ export const Layout = () => {
       <div>
       {user ? (
         <div>
-          <Container centerContent>
+          <Box w="100%" maxW="800px" mx="auto" p={4}>
           <TodoAdd
             todoTextRef={todoTextRef}
             handleAddTodoListItem={handleAddTodoListItem}
@@ -61,11 +61,10 @@ export const Layout = () => {
             deleteTodoListItem={deleteTodoListItem}
             title="完了タスク" as="h2"
           />
-          </Container>
+          </Box>
         </div>
       ) : (
         <div>
-          <p>ログインしてください</p>
         </div>
       )}
     </div>
